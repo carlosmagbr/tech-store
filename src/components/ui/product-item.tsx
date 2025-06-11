@@ -10,9 +10,9 @@ interface ProductItemProps {
 
 const ProductItem = ({ product }: ProductItemProps) => {
     return (
-        <div className="flex flex-col gap-4 max-w-[170px]">
-            <div className="bg-accent rounded-lg w-[170px] h-[170px] flex justify-center items-center relative">
-                <Image src={product.imageUrls[0]} height={0} width={0} sizes="100vh" className="h-auto w-auto max-w-[80%] object-contain " alt={product.name} />
+        <div className="flex flex-col gap-4 ">
+            <div className="bg-accent rounded-lg h-[170px]  flex justify-center items-center relative">
+                <Image src={product.imageUrls[0]} height={0} width={0} sizes="100vh" className="h-auto w-auto max-w-[80%] max-h-[70%] object-contain " alt={product.name} />
                 {product.discountPercentage > 0 &&(
                     <Badge className="absolute top-3 left-3 px-2 py-[2px]">
                         <ArrowDown size={14}/> {product.discountPercentage}%
