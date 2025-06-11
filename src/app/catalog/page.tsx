@@ -11,11 +11,9 @@ const CatalogPage = async () => {
                 <Table size={16} />
                 Catálogo
             </Badge>
-            <div className="grid gap-8 flex-wrap">
+            <div className="grid grid-cols-2 gap-8">
                 {categories.map((category) => (
-                    <div className="w-1/2">
                         <CategoryItem key={category.id} category={category} />
-                    </div>
                 ))}
             </div>
         </div>
