@@ -10,8 +10,8 @@ interface ProductItemProps {
 
 const ProductItem = ({ product }: ProductItemProps) => {
     return (
-        <div className="flex flex-col gap-4 max-w-[156px]">
-            <div className="bg-accent rounded-lg w-[156px] h-[170px] flex justify-center items-center relative">
+        <div className="flex flex-col gap-4 max-w-[170px]">
+            <div className="bg-accent rounded-lg w-[170px] h-[170px] flex justify-center items-center relative">
                 <Image src={product.imageUrls[0]} height={0} width={0} sizes="100vh" className="h-auto w-auto max-w-[80%] object-contain " alt={product.name} />
                 {product.discountPercentage > 0 &&(
                     <Badge className="absolute top-3 left-3 px-2 py-[2px]">
@@ -22,7 +22,7 @@ const ProductItem = ({ product }: ProductItemProps) => {
 
             <div>
                 <p className="text-sm overflow-hidden whitespace-nowrap text-ellipsis">{product.name}</p>
-                <div className="flex items-center justify-center gap-2">
+                <div className="flex items-center  gap-2 overflow-hidden whitespace-nowrap text-ellipsis">
                     {product.discountPercentage > 0 ? (
                         <>
                             <p className="font-semibold ">R$ {product.totalPrice.toFixed(2)}</p>
