@@ -64,7 +64,7 @@ const ProductInfo = ({product}: ProductInfoProps) => {
                 <div className="flex items-center gap-3">
                     <TruckIcon />
                     <div className="flex flex-col">
-                        <p className="text-xs">Entrega via <span className="font-bold">FSPacket </span></p>
+                        <p className="text-xs">Entrega via <span className="font-bold">Magno's Packet </span></p>
                         <p className="text-[#8162FF] text-xs">Envio para <span className="font-bold"> todo Brasil</span></p>
                     </div>
                 </div>
