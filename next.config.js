@@ -4,6 +4,9 @@ const nextConfig = {
         remotePatterns:[{
             hostname:'utfs.io'
         }]
+    },
+    experimental:{
+        serverActions:true,
     }
 }
 
