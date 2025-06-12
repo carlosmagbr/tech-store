@@ -1,6 +1,7 @@
 'use client'
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import DiscountBadge from "@/components/ui/discount-badge";
 import { ProductWithTotalPrice } from "@/helpers/product";
 import { Product } from "@prisma/client";
 import { ArrowDownIcon, ArrowLeftIcon, ArrowRightIcon, TruckIcon } from "lucide-react";
@@ -33,9 +34,9 @@ const ProductInfo = ({ products: { name, basePrice, totalPrice, description, dis
             <div className="flex items-center gap-2">
                 <h1 className="text-2xl font-bold">R${totalPrice.toFixed(2)}</h1>
                 {discountPercentage > 0 && (
-                    <Badge className="px-2 py-[2px]">
-                        <ArrowDownIcon size={14} />{discountPercentage}%
-                    </Badge>
+                    <DiscountBadge>
+                        {discountPercentage}
+                    </DiscountBadge>
                 )}
             </div>
             {discountPercentage > 0 && (
