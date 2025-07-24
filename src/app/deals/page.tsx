@@ -1,31 +1,25 @@
 import { Badge } from "@/components/ui/badge";
 import ProductItem from "@/components/ui/product-item";
-import { CATEGORY_ICON } from "@/constants/category-icons";
 import { computeProductTotalPrice } from "@/helpers/product";
 import { prismaClient } from "@/lib/prisma";
+import { PercentIcon } from "lucide-react";
 
-const CategoryProducts = async ({ params }: any) => {
-    const category = await prismaClient.category.findFirst({
+const DealsPage = async () => {
+    const deals = await prismaClient.product.findMany({
         where: {
-            slug: params.slug
+            discountPercentage: {
+                gt: 0,
+            },
         },
-        include: {
-            products: true
-        }
     })
-
-    if(!category){
-        return null;
-    }
-
     return (
-        <div className="p-5 gap-8 flex flex-col">
+        <div className="p-5 flex flex-col gap-8">
             <Badge className="gap-1 w-fit border-primary px-3 text-base uppercase py-[0.375rem] rounded-full" variant='outline'>
-                {CATEGORY_ICON[params.slug as keyof typeof CATEGORY_ICON]}
-                {category.name}
+                <PercentIcon size={16} />
+                Ofertas
             </Badge>
             <div className="grid grid-cols-2 gap-8">
-                {category.products.map((product) => (
+                {deals.map((product) => (
                     <ProductItem key={product.id} product={computeProductTotalPrice(product)} />
                 ))}
             </div>
@@ -33,4 +27,4 @@ const CategoryProducts = async ({ params }: any) => {
     );
 }
 
-export default CategoryProducts;
+export default DealsPage;
