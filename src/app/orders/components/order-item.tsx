@@ -6,6 +6,7 @@ import OrderProductItem from "./order-product-item";
 import { Separator } from "@/components/ui/separator";
 import { useMemo } from "react";
 import { computeProductTotalPrice } from "@/helpers/product";
+import { getOrderStatus } from "./helpers/status";
 
 
 interface OrderItemProps {
@@ -38,7 +39,7 @@ const OrderItem = ({ order }: OrderItemProps) => {
                 <AccordionItem value={order.id}>
                     <AccordionTrigger>
                         <div className="flex flex-col gap-1 text-left">
-                            pedido com {order.orderProducts.length} produto(s)
+                            Pedido com {order.orderProducts.length} produto(s)
                         <span className="opacity-60">
                             Feito em {format(new Date(order.createdAt), 'd/MM/y')}
                         </span>
@@ -49,7 +50,7 @@ const OrderItem = ({ order }: OrderItemProps) => {
                             <div className="flex items-center justify-between">
                                 <div className="font-bold">
                                     <p>Status</p>
-                                    <p className="text-[#8162FF]">{order.status}</p>
+                                    <p className="text-[#8162FF]">{getOrderStatus(order.status)}</p>
                                 </div>
                                 <div>
                                     <p className="font-bold">Pagamento</p>
