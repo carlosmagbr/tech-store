@@ -1,0 +1,39 @@
+
+import { Badge } from "@/components/ui/badge";
+import { authOptions } from "@/lib/auth";
+import { prismaClient } from "@/lib/prisma";
+import { PackageSearchIcon } from "lucide-react";
+import { getServerSession } from "next-auth";
+import OrderItem from "./components/order-item";
+
+
+const OrderPage = async () => {
+    const user = getServerSession(authOptions)
+    if (!user) {
+        return ('Você precisa estar logado para acessar esta página.')
+    }
+
+    const orders = await prismaClient.order.findMany({
+        where: {
+            userId: (user as any).id
+        },
+        include: {
+            orderProducts: true,
+        }
+    })
+    return (
+        <div className="p-5">
+            <Badge className="gap-1 w-fit border-primary px-3 text-base uppercase py-[0.375rem] rounded-full" variant='outline'>
+                <PackageSearchIcon size={16} />
+                Meus pedidos
+            </Badge>
+            {
+               orders.map((order) => (
+                   <OrderItem order={order} key={order.id} />
+               ))
+           }
+        </div>
+    );
+}
+
+export default OrderPage;

@@ -74,7 +74,7 @@ const Header = () => {
                                 </Link>
                             </SheetClose>
                             <SheetClose asChild>
-                                <Link href='/'>
+                                <Link href='/orders'>
                                     <Button variant='outline' className="w-full justify-start gap-2">
                                         <PackageSearchIcon size={16} />
                                         Meus Pedidos
@@ -100,7 +100,7 @@ const Header = () => {
                         </div>
                     </SheetContent>
                 </Sheet>
-                <Link href='/'>
+                <Link href=''>
                     <h1 className="text-lg font-semibold">
                         <span className="text-primary">Tech</span> Store
                     </h1>
@@ -142,7 +142,7 @@ const Header = () => {
                                 Ofertas
                             </Button>
                         </Link>
-                        <Link href='/'>
+                        <Link href='/orders'>
                             <Button variant='outline' className="w-full justify-start gap-2">
                                 <PackageSearchIcon size={16} />
                                 Meus Pedidos
