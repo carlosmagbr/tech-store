@@ -14,7 +14,7 @@ const OrderProductItem = ({ orderProduct }: OrderProductsItemProps) => {
     const productWithTotalPrice = computeProductTotalPrice(orderProduct.product)
     return (
         <div className="flex items-center gap-4" >
-            <div className="bg-accent rounded-lg w-[77px] h-[77px] flex items-center justify-center">
+            <div className="bg-accent rounded-lg w-[77px] h-[100px] flex items-center justify-center">
                 <Image
                     src={orderProduct.product.imageUrls[0]}
                     width={0}
@@ -27,7 +27,7 @@ const OrderProductItem = ({ orderProduct }: OrderProductsItemProps) => {
             <div className="flex flex-col gap-1 w-full">
                 <div className="flex bg-accent rounded-lg py-1 items-center gap-1 ">
                     <p className="text-[10px] px-2">
-                        Vendido e entregue por {""} TechStore
+                        Vendido e entregue por TechStore
                     </p>
                 </div>
                 <p className="text-xs">{orderProduct.product.name}</p>
@@ -38,7 +38,7 @@ const OrderProductItem = ({ orderProduct }: OrderProductsItemProps) => {
                             <p className="text-xs line-through opacity-60">R$ {productWithTotalPrice.basePrice.toFixed(2)}</p>
                         )}
                     </div>
-                    <p className="text-xs line-through opacity-60">Quantidade: {orderProduct.quantity}</p>
+                    <p className="text-xs opacity-60">Quantidade: {orderProduct.quantity}</p>
                 </div>
             </div>
         </div >

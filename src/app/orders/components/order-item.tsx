@@ -1,8 +1,11 @@
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Card } from "@/components/ui/card";
 import { Prisma } from "@prisma/client";
-import { format } from "date-fns";
+import { format, sub } from "date-fns";
 import OrderProductItem from "./order-product-item";
+import { Separator } from "@/components/ui/separator";
+import { useMemo } from "react";
+import { computeProductTotalPrice } from "@/helpers/product";
 
 
 interface OrderItemProps {
@@ -15,6 +18,20 @@ interface OrderItemProps {
 
 
 const OrderItem = ({ order }: OrderItemProps) => {
+    const subtotal = useMemo(() => {
+        return order.orderProducts.reduce((total, orderProduct) => {
+            return total + Number(orderProduct.product.basePrice) * orderProduct.quantity;
+        }, 0);
+    }, [order.orderProducts]);
+
+    const total = useMemo(() => {
+        return order.orderProducts.reduce((total, orderProduct) => {
+            const productWithTotalPrice = computeProductTotalPrice(orderProduct.product);
+            return total + productWithTotalPrice.totalPrice * orderProduct.quantity;
+        }, 0);
+    }, [order.orderProducts]);
+
+    const discount = subtotal - total;
     return (
         <Card className="px-5 my-5">
             <Accordion type="single" className="w-full" collapsible>
@@ -22,6 +39,9 @@ const OrderItem = ({ order }: OrderItemProps) => {
                     <AccordionTrigger>
                         <div className="flex flex-col gap-1 text-left">
                             pedido com {order.orderProducts.length} produto(s)
+                        <span className="opacity-60">
+                            Feito em {format(new Date(order.createdAt), 'd/MM/y')}
+                        </span>
                         </div>
                     </AccordionTrigger>
                     <AccordionContent>
@@ -30,12 +50,6 @@ const OrderItem = ({ order }: OrderItemProps) => {
                                 <div className="font-bold">
                                     <p>Status</p>
                                     <p className="text-[#8162FF]">{order.status}</p>
-                                </div>
-                                <div>
-                                    <p className="font-bold">Data</p>
-                                    <p className="opacity-60">
-                                        {format(new Date(order.createdAt), 'd/MM/y')}
-                                    </p>
                                 </div>
                                 <div>
                                     <p className="font-bold">Pagamento</p>
@@ -47,6 +61,36 @@ const OrderItem = ({ order }: OrderItemProps) => {
                             {order.orderProducts.map((orderProduct) => (
                                 <OrderProductItem orderProduct={orderProduct} key={orderProduct.id} />
                             ))}
+
+                            <div className="flex w-full flex-col gap-1 text-sm">
+                                <Separator />
+
+                                <div className="flex w-full justify-between py-3">
+                                    <p>Subtotal</p>
+                                    <p>R$ {subtotal.toFixed(2)}</p>
+                                </div>
+
+                                <Separator />
+
+                                <div className="flex w-full justify-between py-3">
+                                    <p>Entrega</p>
+                                    <p>Grátis</p>
+                                </div>
+
+                                <Separator />
+
+                                <div className="flex w-full justify-between py-3">
+                                    <p>Descontos</p>
+                                    <p>- R$ {discount.toFixed(2)}</p>
+                                </div>
+
+                                <Separator />
+
+                                <div className="flex w-full justify-between py-3">
+                                    <p>Total</p>
+                                    <p>R$ {total.toFixed(2)}</p>
+                                </div>
+                            </div>
                         </div>
                     </AccordionContent>
                 </AccordionItem>
