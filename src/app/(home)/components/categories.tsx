@@ -4,7 +4,7 @@ import CategoryItem from "./category-item";
 const Categories = async () => {
     const categories = await prismaClient.category.findMany({})
     return ( 
-        <div className="grid grid-cols-2 gap-2">
+        <div className="grid grid-cols-2 gap-2 md:flex md:justify-between">
             {categories.map(category=><CategoryItem key={category.id} category={category}/>)}
         </div>
      );

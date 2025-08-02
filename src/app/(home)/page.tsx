@@ -22,7 +22,7 @@ export default async function Home() {
             }
         }
     })
-    
+
     const mouses = await prismaClient.product.findMany({
         where: {
             category: {
@@ -31,24 +31,32 @@ export default async function Home() {
         }
     })
     return (
-        <div className="flex flex-col gap-5 py-5">
-            <PromoBanner alt="Até 55% de deconto esse mês" src="/banner1.png" /> 
-            <div className="px-5">
-                <Categories />
-            </div>
-            <div>
-                <SectionTitle>Ofertas</SectionTitle>
-                <ProductList products={deals} />
-            </div>
-            <PromoBanner alt="Até 55% de deconto esse mês" src="/banner2.png" />
-            <div>
-                <SectionTitle>Teclados</SectionTitle>
-                <ProductList products={keyboards} />
-            </div>
-            <PromoBanner alt="Até 55% de deconto esse mês" src="/banner3.png" />
-            <div>
-                <SectionTitle>Teclados</SectionTitle>
-                <ProductList products={mouses} />
+        <div className="py-5">
+            <PromoBanner alt="Até 55% de deconto esse mês" src="/banner1.png" />
+            <div className="container flex flex-col gap-5 py-5">
+                <div className="px-5">
+                    <Categories />
+                </div>
+
+                <div>
+                    <SectionTitle>Ofertas</SectionTitle>
+                    <ProductList products={deals} />
+                </div>
+                <div className="md:flex hidden gap-12">
+                    <PromoBanner alt="Até 55% de deconto esse mês" className="w-1/2" src="/banner3.png"/>
+                    <PromoBanner alt="Até 55% de deconto esse mês" className="w-1/2" src="/banner2.png"/>
+                </div>
+                <PromoBanner className="md:0" alt="Até 55% de deconto esse mês" src="/banner2.png" />
+                <div>
+                    <SectionTitle>Teclados</SectionTitle>
+                    <ProductList products={keyboards} />
+                </div>
+                <PromoBanner className="md:0" alt="Até 55% de deconto esse mês" src="/banner3.png" />
+                <PromoBanner  alt="Até 55% de deconto esse mês" src="/banner3.png" />
+                <div>
+                    <SectionTitle>Mouses</SectionTitle>
+                    <ProductList products={mouses} />
+                </div>
             </div>
         </div>
     )

@@ -1,18 +1,19 @@
 'use client'
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import Cart from "@/components/ui/cart";
 import DiscountBadge from "@/components/ui/discount-badge";
+import { SheetTrigger, SheetContent,Sheet } from "@/components/ui/sheet";
 import { ProductWithTotalPrice } from "@/helpers/product";
 import { CartContext } from "@/providers/cart";
 import { Product } from "@prisma/client";
-import { ArrowDownIcon, ArrowLeftIcon, ArrowRightIcon, TruckIcon } from "lucide-react";
+import { ArrowDownIcon, ArrowLeftIcon, ArrowRightIcon, ShoppingCartIcon, TruckIcon } from "lucide-react";
 import { useContext, useState } from "react";
 
 interface ProductInfoProps {
     product: ProductWithTotalPrice;
 }
 
-const ProductInfo = ({product}: ProductInfoProps) => {
+const ProductInfo = ({ product }: ProductInfoProps) => {
     const [quantity, setQuantity] = useState(1)
 
     const { addProductToCart } = useContext(CartContext)
@@ -56,9 +57,16 @@ const ProductInfo = ({product}: ProductInfoProps) => {
                 <h3 className="font-bold">Descrição</h3>
                 <p className="text-sm opacity-60 text-justify">{product.description}</p>
             </div>
-            <Button className="mt-8 uppercase font-bold" onClick={handleAddToCartClick}>
-                Adicionar ao carrinho
-            </Button>
+            <Sheet>
+                <SheetTrigger asChild>
+                    <Button className="mt-8 uppercase font-bold" onClick={handleAddToCartClick}>
+                        Adicionar ao carrinho
+                    </Button>
+                </SheetTrigger>
+                <SheetContent side='right'>
+                    <Cart />
+                </SheetContent>
+            </Sheet>
 
             <div className="bg-accent flex items-center px-5 py-2 justify-between mt-5 rounded-lg">
                 <div className="flex items-center gap-3">

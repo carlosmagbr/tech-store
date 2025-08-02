@@ -14,15 +14,15 @@ const ProductImages = ({ imageUrls, name }: ProductImagesProps) => {
         SetCurrentImage(imageUrl)
     }
     return (
-        <div className="flex-col flex">
-            <div className="bg-accent h-[380px] w-full items-center justify-center flex rounded-lg">
-                <Image src={currentImage} alt={name} height={0} width={0} sizes="100vh" className="h-auto max-h-[70%] w-auto max-w-[80%] object-contain" />
+        <div className="flex-col flex relative">
+            <div className="bg-accent h-[380px] md:h-[500px] w-full items-center justify-center flex rounded-lg">
+                <Image src={currentImage} alt={name} height={0} width={0} sizes="100vh" className="h-auto max-h-[70%]  w-auto max-w-[80%] object-contain" />
             </div>
-            <div className="flex gap-5 mt-5">
+            <div className="flex gap-5 mt-5 md:absolute md:flex md:flex-col md:left-5">
                 {imageUrls.map(imageUrl => (
                     <button
                         key={imageUrl}
-                        className={`bg-accent w-full flex h-[100px] items-center justify-center rounded-lg border-2 border-solid border-transparent ${imageUrl === currentImage && "!border-primary"}`}
+                        className={`bg-accent w-full flex h-[100px] items-center justify-center rounded-lg border-2 border-solid border-transparent md:bg-[#0B0B0B] md:w-20 md:h-20 ${imageUrl === currentImage && "!border-primary"}`}
                         onClick={() => handleImageClick(imageUrl)}
                     >
                         <Image src={imageUrl} alt={name} height={0} width={0} sizes="100vh" className="h-auto max-h-[70%] w-auto max-w-[80%]" />

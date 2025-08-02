@@ -10,8 +10,8 @@ interface CategoryItemProps {
 const CategoryItem = ({ category }: CategoryItemProps) => {
 
     return (
-        <Link href={`/category/${category.slug}`}>
-            <Badge variant="outline" className="p-3 flex gap-2">
+        <Link className="md:w-full " href={`/category/${category.slug}`}>
+            <Badge variant="outline" className="p-3 flex gap-2 md:justify-center">
                 {CATEGORY_ICON[category.slug as keyof typeof CATEGORY_ICON]}
                 <span className="text-xs font-bold">{category.name}</span>
             </Badge>

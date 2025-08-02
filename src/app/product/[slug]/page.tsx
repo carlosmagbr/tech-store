@@ -34,9 +34,11 @@ const ProductDetailsPage = async ({ params: { slug } }: ProductDetailsPageProps)
     if (!product) return null
 
     return (
-        <div className="p-5 flex flex-col gap-8 pb-8">
+        <div className="p-5 flex flex-col gap-8 pb-8 md:container">
+            <div className="md:grid md:grid-cols-2 gap-8">
             <ProductImages imageUrls={product.imageUrls} name={product.name} />
             <ProductInfo product={computeProductTotalPrice(product)} />
+            </div>
             <div className="-mx-5">
             <SectionTitle>Produtos recomendados</SectionTitle>
                 <ProductList products={product.category.products} />
