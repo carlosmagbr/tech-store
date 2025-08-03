@@ -6,7 +6,7 @@ import OrderProductItem from "./order-product-item";
 import { Separator } from "@/components/ui/separator";
 import { useMemo } from "react";
 import { computeProductTotalPrice } from "@/helpers/product";
-import { getOrderStatus } from "./helpers/status";
+import { getOrderStatus } from "../../app/(shop)/orders/components/helpers/status";
 
 
 interface OrderItemProps {

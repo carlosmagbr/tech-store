@@ -15,9 +15,11 @@ const Sidebar = () => {
                 </h1>
             </Link>
             <div className="flex flex-col gap-3 w-full">
-                <Button variant='outline' className="justify-start gap-2">
+                <Button asChild variant='outline' className={`justify-start gap-2 bg-primary hover:bg-primary ${path.includes("/dashboard/") && "bg-inherit text-white hover:bg-inherit"}`}>
+                    <Link href='/dashboard'>
                     <LayoutDashboardIcon size={16} />
                     Dashboard
+                    </Link>
                 </Button>
                 <Button asChild variant='outline' className={`justify-start gap-2 ${path.includes("/products") && "bg-primary text-white hover:bg-primary"}`}>
                     <Link href='/dashboard/products'>
@@ -27,13 +29,15 @@ const Sidebar = () => {
                 </Button>
                 <Button asChild variant='outline' className={`justify-start gap-2 ${path.includes("/categories") && "bg-primary text-white hover:bg-primary"}`}>
                     <Link href='/dashboard/categories'>
-                    <ListOrderedIcon scale={16} />
-                    Categorias
+                        <ListOrderedIcon scale={16} />
+                        Categorias
                     </Link>
                 </Button>
-                <Button variant='outline' className="justify-start gap-2">
-                    <PackageSearchIcon size={16} />
-                    Pedidos
+                <Button asChild variant='outline' className={`justify-start gap-2 ${path.includes("/orders") && "bg-primary text-white hover:bg-primary"}`}>
+                    <Link href='/dashboard/orders'>
+                        <PackageSearchIcon size={16} />
+                        Pedidos
+                    </Link>
                 </Button>
             </div>
         </div >
