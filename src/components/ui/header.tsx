@@ -8,6 +8,8 @@ import { Avatar, AvatarFallback, AvatarImage } from "./avatar";
 import { Separator } from "./separator";
 import Link from "next/link";
 import Cart from "./cart";
+import { Popover, PopoverContent, PopoverTrigger } from "./popover";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "./dropdown-menu";
 
 const Header = () => {
     const { status, data } = useSession()
@@ -142,26 +144,41 @@ const Header = () => {
                                 Ofertas
                             </Button>
                         </Link>
-                        <Link href='/orders'>
-                            <Button variant='outline' className="w-full justify-start gap-2">
-                                <PackageSearchIcon size={16} />
-                                Meus Pedidos
-                            </Button>
-                        </Link>
                     </ul>
                 </nav>
                 <nav>
                     <ul className="flex gap-4">
                         <li>
                             {status === 'authenticated' && (
-                                <Avatar>
-                                    <AvatarFallback>
-                                        {data.user?.name?.[0].toUpperCase()}
-                                    </AvatarFallback>
-                                    {data.user?.image && (
-                                        <AvatarImage src={data.user.image} />
-                                    )}
-                                </Avatar>
+                                <DropdownMenu>
+                                    <DropdownMenuTrigger asChild>
+                                        <Avatar className="cursor-pointer">
+                                            <AvatarFallback>
+                                                {data.user?.name?.[0].toUpperCase()}
+                                            </AvatarFallback>
+                                            {data.user?.image && (
+                                                <AvatarImage src={data.user.image} />
+                                            )}
+                                        </Avatar>
+                                    </DropdownMenuTrigger>
+                                    <DropdownMenuContent className="w-80 flex flex-col gap-2 p-5">
+                                        <p className="font-medium capitalize">{data.user?.name}</p>
+                                        <DropdownMenuItem asChild>
+                                            <Button onClick={handleLogoutClick} variant='outline' className="w-full justify-start gap-2 cursor-pointer">
+                                                <LogOutIcon size={16} />
+                                                Fazer Logout
+                                            </Button>
+                                        </DropdownMenuItem>
+                                        <DropdownMenuItem asChild>
+                                            <Button asChild variant='outline' className="w-full justify-start gap-2">
+                                                <Link href='/orders' className="w-full p-0 cursor-pointer">
+                                                    <PackageSearchIcon size={16} />
+                                                    Meus Pedidos
+                                                </Link>
+                                            </Button>
+                                        </DropdownMenuItem>
+                                    </DropdownMenuContent>
+                                </DropdownMenu>
                             )}
                             {status === 'unauthenticated' && (
                                 <Button onClick={handleLoginClick} variant='outline' className="w-full justify-start gap-2">
