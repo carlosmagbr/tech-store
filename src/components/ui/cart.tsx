@@ -10,6 +10,7 @@ import { createCheckout } from "@/actions/checkout";
 import { loadStripe } from "@stripe/stripe-js";
 import { createOrder } from "@/actions/order";
 import { useSession } from "next-auth/react";
+import { computeProductTotalPrice } from "@/helpers/product";
 
 
 const Cart = () => {
@@ -41,7 +42,7 @@ const Cart = () => {
                 <div className="flex flex-col h-full gap-5">
                     {products.length > 0 ? (
                         products.map((product) => (
-                            <CartItem key={product.id} product={product} />
+                            <CartItem key={product.id} product={{...product,totalPrice:computeProductTotalPrice(product)}} />
                         ))
                     ) : (
                         <p className="text-center font-semibold">Seu carrinho está vazio !</p>
