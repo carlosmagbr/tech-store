@@ -25,9 +25,11 @@ const Sidebar = () => {
                         Produtos
                     </Link>
                 </Button>
-                <Button variant='outline' className="justify-start gap-2">
+                <Button asChild variant='outline' className={`justify-start gap-2 ${path.includes("/categories") && "bg-primary text-white hover:bg-primary"}`}>
+                    <Link href='/dashboard/categories'>
                     <ListOrderedIcon scale={16} />
                     Categorias
+                    </Link>
                 </Button>
                 <Button variant='outline' className="justify-start gap-2">
                     <PackageSearchIcon size={16} />
