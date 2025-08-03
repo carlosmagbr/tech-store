@@ -1,6 +1,12 @@
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { ProductWithTotalPrice } from "@/helpers/product";
 
+export type ProductWithTotalPriceAndCategory = ProductWithTotalPrice & {
+    category: {
+        name: string;
+    };
+}
+
 interface ProductsTableProps {
     products: ProductWithTotalPrice[]
 }
@@ -18,10 +24,10 @@ const ProductsTable = ({ products }: ProductsTableProps) => {
                 </TableRow>
             </TableHeader>
             <TableBody>
-                {products.map(product=>
+                {products.map(product =>
                     <TableRow key={product.id}>
                         <TableCell>{product.name}</TableCell>
-                        <TableCell>Categoria</TableCell>
+                        <TableCell>{(product as any).category.name}</TableCell>
                         <TableCell>R$ {product.totalPrice.toFixed(2)}</TableCell>
                         <TableCell>R$ {product.basePrice.toFixed(2)}</TableCell>
                         <TableCell>0</TableCell>
