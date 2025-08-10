@@ -19,7 +19,7 @@ const Cart = () => {
 
     const handleFinishPurchaseCick = async () => {
         if(!data?.user){
-            return
+            return alert('Você precisa estar logado para finalizar a compra.')
         }
         const order = await createOrder(products, (data?.user as any).id)
         
